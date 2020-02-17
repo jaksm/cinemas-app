@@ -1,4 +1,5 @@
 import {TextStyle} from 'react-native';
+import {Theme} from "@react-navigation/native/lib/typescript/src/types";
 
 const colors = {
   white: '#F6F6F6',
@@ -59,7 +60,18 @@ const theme = {
   screenPadding,
 };
 
-export type ThemeColors = keyof typeof colors;
-export type ThemeTypography = keyof typeof typography;
+export type AppThemeColors = keyof typeof colors;
+export type AppThemeTypography = keyof typeof typography;
+
+export const NavigationTheme: Theme = {
+  colors: {
+    background: colors.background,
+    border: colors.grey,
+    card: colors.background,
+    primary: colors.primary,
+    text: colors.text,
+  },
+  dark: true,
+};
 
 export default theme;
