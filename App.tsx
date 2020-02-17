@@ -1,15 +1,21 @@
+import 'react-native-gesture-handler';
 import React from 'react';
-import {SafeAreaView, StatusBar, Text} from 'react-native';
+import { StatusBar, Text} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { enableScreens } from 'react-native-screens';
 
+enableScreens(); // Performance optimization
+
+import AuthStack from "./src/navigation/AuthStack";
 const App = () => {
   return (
-    <NavigationContainer>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <Text>Hello Cinemas!</Text>
-      </SafeAreaView>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <StatusBar barStyle="dark-content" />
+        <AuthStack/>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 };
 
