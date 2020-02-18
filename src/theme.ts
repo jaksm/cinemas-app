@@ -49,10 +49,15 @@ const typography = {
 
 const screenPadding = 24;
 
+const borderRadius = {
+  small: 4,
+};
+
 const theme = {
   colors,
   typography,
   screenPadding,
+  borderRadius,
 };
 
 export type AppThemeColors = keyof typeof colors;
