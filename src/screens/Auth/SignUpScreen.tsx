@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {
   KeyboardAvoidingView,
   StyleSheet,
-  Text,
+  Text, TextStyle,
   View,
   ViewStyle,
 } from 'react-native';
@@ -21,19 +21,22 @@ const SignUpScreen = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
+  const [error, setError] = useState<string | null>(null);
+
   async function handleSignUp() {
     try {
+      setError(null);
       await signUp({name, email, password});
       // navigation.navigate('Home');
     } catch (e) {
       console.log('Error signing up', e);
+      setError("Oops, that didn't work.");
     }
   }
 
   return (
     <Screen>
       <Text style={theme.typography.h1}>Sign up</Text>
-
       <KeyboardAvoidingView style={styles.container}>
         <View style={styles.inputs}>
           <TextInput
@@ -60,6 +63,9 @@ const SignUpScreen = () => {
             autoCapitalize={'none'}
             secureTextEntry={true}
           />
+          {error && (
+            <Text style={[theme.typography.p, styles.errorText]}>{error}</Text>
+          )}
         </View>
 
         <Button onPress={handleSignUp}>Sign Up</Button>
@@ -77,6 +83,9 @@ const styles = StyleSheet.create({
   inputs: {
     marginTop: 14 * 2,
   } as ViewStyle,
+  errorText: {
+    color: theme.colors.error,
+  } as TextStyle,
 });
 
 export default SignUpScreen;
