@@ -27,7 +27,7 @@ const SignInScreen = () => {
       setError(null);
       await signIn({email, password});
       console.log('SignedIn');
-      // navigation.navigate('Home');
+      navigation.navigate('Home');
     } catch (e) {
       console.log('Error signing in', e);
       setError("Oops, that didn't work.");

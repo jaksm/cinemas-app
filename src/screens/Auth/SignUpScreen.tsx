@@ -27,7 +27,7 @@ const SignUpScreen = () => {
     try {
       setError(null);
       await signUp({name, email, password});
-      // navigation.navigate('Home');
+      navigation.navigate('Home');
     } catch (e) {
       console.log('Error signing up', e);
       setError("Oops, that didn't work.");

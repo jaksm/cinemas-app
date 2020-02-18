@@ -1,21 +1,24 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { StatusBar, Text} from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { enableScreens } from 'react-native-screens';
-import { NavigationTheme } from "./src/theme";
-
-import AuthStack from "./src/navigation/AuthStack";
-import {usePersistentNavigation} from "./src/hooks/usePersistentNavigation";
+import {StatusBar} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {enableScreens} from 'react-native-screens';
+import {NavigationTheme} from './src/theme';
+import {usePersistentNavigation} from './src/hooks/usePersistentNavigation';
+import AppStack from './src/navigation/AppStack';
 
 enableScreens(); // Performance optimization
 
 const App = () => {
-  const {initialState, isReady, persistNavigationState} = usePersistentNavigation();
+  const {
+    initialState,
+    isReady,
+    persistNavigationState,
+  } = usePersistentNavigation();
 
   if (!isReady) {
-    return null
+    return null;
   }
 
   return (
@@ -23,10 +26,9 @@ const App = () => {
       <NavigationContainer
         theme={NavigationTheme}
         initialState={initialState}
-        onStateChange={persistNavigationState}
-      >
+        onStateChange={persistNavigationState}>
         <StatusBar barStyle="light-content" />
-        <AuthStack/>
+        <AppStack />
       </NavigationContainer>
     </SafeAreaProvider>
   );
