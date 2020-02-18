@@ -20,8 +20,8 @@ function AuthStack() {
         },
       }}>
       <Stack.Screen name="Welcome" component={WelcomeScreen} />
-      <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="Register" component={RegisterScreen} />
+      <Stack.Screen name="SignIn" component={LoginScreen} />
+      <Stack.Screen name="SignUp" component={RegisterScreen} />
     </Stack.Navigator>
   );
 }
