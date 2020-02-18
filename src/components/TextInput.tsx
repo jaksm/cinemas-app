@@ -16,7 +16,8 @@ const TextInput: FC<TextInputProps> = props => {
 const styles = StyleSheet.create({
   container: {
     paddingVertical: 14 * 1.25,
-    paddingHorizontal: 14,
+    paddingHorizontal: 14 * 1.1,
+    marginVertical: 14 / 2,
     backgroundColor: theme.colors.dark,
     borderRadius: theme.borderRadius.small,
     color: theme.colors.white,
