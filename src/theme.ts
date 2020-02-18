@@ -61,7 +61,7 @@ export type AppThemeTypography = keyof typeof typography;
 export const NavigationTheme: Theme = {
   colors: {
     background: colors.background,
-    border: colors.grey,
+    border: colors.background,
     card: colors.background,
     primary: colors.primary,
     text: colors.text,
