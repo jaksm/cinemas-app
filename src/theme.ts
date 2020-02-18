@@ -43,10 +43,11 @@ const typography = {
     fontWeight: '600',
     fontSize: 14,
     color: colors.white,
+    textTransform: 'uppercase',
   } as TextStyle,
 };
 
-const screenPadding = 16;
+const screenPadding = 30;
 
 const theme = {
   colors,
