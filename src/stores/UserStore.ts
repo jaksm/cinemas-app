@@ -26,11 +26,22 @@ interface UserData {
 class UserStore {
   @observable user!: User;
 
+  checkAuth = async (): Promise<boolean> => {
+    const data = await AsyncStorage.getItem('currentUser');
+    if (!data) {
+      return false;
+    }
+
+    this.user = JSON.parse(data);
+    return true;
+  };
+
   signUp = async (credentials: SignUpCredentials): Promise<void> => {
-    return AsyncStorage.setItem(
-      credentials.email,
-      JSON.stringify({name: credentials.name, password: credentials.password}),
-    );
+    const userData: UserData = {
+      name: credentials.name,
+      password: credentials.password,
+    };
+    await AsyncStorage.setItem(credentials.email, JSON.stringify(userData));
   };
 
   @action signIn = async (credentials: SignInCredentials): Promise<void> => {
@@ -43,6 +54,12 @@ class UserStore {
     if (credentials.password !== userData.password) {
       throw new Error('Email or password incorrect');
     }
+
+    await AsyncStorage.setItem(
+      'currentUser',
+      JSON.stringify({...userData, email: credentials.email}),
+    );
+
     this.user = {name: userData.name, email: credentials.email};
   };
 }

@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   Image,
   StyleSheet,
@@ -8,16 +7,19 @@ import {
   View,
   TextStyle,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
-
 import {useNavigation} from '@react-navigation/native';
-
 import theme from '../../theme';
 import SafeScreen from '../../components/SafeScreen';
 import Button from '../../components/Button';
+import {useUserStore} from '../../stores/UserStore';
 
 const WelcomeScreen = () => {
   const navigation = useNavigation();
+  const {checkAuth} = useUserStore();
+
+  const [loading, setLoading] = useState<boolean>(true);
 
   function handleSignUpPress() {
     navigation.navigate('SignUp');
@@ -27,6 +29,20 @@ const WelcomeScreen = () => {
     navigation.navigate('SignIn');
   }
 
+  const handleCheckAuth = useCallback(async () => {
+    const authed = await checkAuth();
+
+    if (authed) {
+      navigation.navigate('Home');
+    } else {
+      setLoading(false);
+    }
+  }, [checkAuth, navigation]);
+
+  useEffect(() => {
+    handleCheckAuth();
+  }, [handleCheckAuth]);
+
   return (
     <SafeScreen style={styles.container}>
       <View style={styles.content}>
@@ -35,18 +51,22 @@ const WelcomeScreen = () => {
           <Text style={theme.typography.h1}>Take Your Seat</Text>
         </View>
 
-        <View>
-          <Button fullWidth={true} onPress={handleSignUpPress}>
-            Sign up
-          </Button>
+        {loading ? (
+          <ActivityIndicator size={'large'} color={theme.colors.primary} />
+        ) : (
+          <View>
+            <Button fullWidth={true} onPress={handleSignUpPress}>
+              Sign up
+            </Button>
 
-          <TouchableOpacity activeOpacity={0.9} onPress={handleSignInPress}>
-            <Text style={[theme.typography.p, styles.text]}>
-              Already have account?{' '}
-              <Text style={styles.signInText}>Sign in</Text> instead.
-            </Text>
-          </TouchableOpacity>
-        </View>
+            <TouchableOpacity activeOpacity={0.9} onPress={handleSignInPress}>
+              <Text style={[theme.typography.p, styles.text]}>
+                Already have account?{' '}
+                <Text style={styles.signInText}>Sign in</Text> instead.
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     </SafeScreen>
   );
