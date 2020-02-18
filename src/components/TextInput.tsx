@@ -10,7 +10,13 @@ import {
 import theme from '../theme';
 
 const TextInput: FC<TextInputProps> = props => {
-  return <Base style={[styles.container, props.style]} placeholderTextColor={theme.colors.grey} {...props} />;
+  return (
+    <Base
+      style={[styles.container, props.style]}
+      placeholderTextColor={theme.colors.grey}
+      {...props}
+    />
+  );
 };
 
 const styles = StyleSheet.create({
