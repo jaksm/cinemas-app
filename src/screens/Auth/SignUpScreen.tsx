@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   KeyboardAvoidingView,
   StyleSheet,
@@ -11,12 +11,23 @@ import Screen from '../../components/Screen';
 import TextInput from '../../components/TextInput';
 import Button from '../../components/Button';
 import {useNavigation} from '@react-navigation/native';
+import {useUserStore} from '../../stores/UserStore';
 
 const SignUpScreen = () => {
   const navigation = useNavigation();
+  const {signUp} = useUserStore();
 
-  function handleSignUp() {
-    // navigation.navigate('Home');
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
+  async function handleSignUp() {
+    try {
+      await signUp({name, email, password});
+      // navigation.navigate('Home');
+    } catch (e) {
+      console.log('Error signing up', e);
+    }
   }
 
   return (
@@ -26,11 +37,15 @@ const SignUpScreen = () => {
       <KeyboardAvoidingView style={styles.container}>
         <View style={styles.inputs}>
           <TextInput
+            value={name}
+            onChangeText={setName}
             placeholder={'John Doe'}
             autoCompleteType={'name'}
             autoCapitalize={'words'}
           />
           <TextInput
+            value={email}
+            onChangeText={setEmail}
             placeholder={'john@doe.com'}
             keyboardType={'email-address'}
             autoCompleteType={'email'}
@@ -38,6 +53,8 @@ const SignUpScreen = () => {
             autoCapitalize={'none'}
           />
           <TextInput
+            value={password}
+            onChangeText={setPassword}
             placeholder={'*******'}
             autoCorrect={false}
             autoCapitalize={'none'}

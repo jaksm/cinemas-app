@@ -26,7 +26,7 @@ interface UserData {
 class UserStore {
   @observable user!: User;
 
-  static signUp = async (credentials: SignUpCredentials): Promise<void> => {
+  signUp = async (credentials: SignUpCredentials): Promise<void> => {
     return AsyncStorage.setItem(
       credentials.email,
       JSON.stringify({name: credentials.name, password: credentials.password}),

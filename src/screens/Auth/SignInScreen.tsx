@@ -1,16 +1,33 @@
-import React from 'react';
-import {KeyboardAvoidingView, StyleSheet, Text, View, ViewStyle} from 'react-native';
-import Screen from "../../components/Screen";
-import {useNavigation} from "@react-navigation/native";
-import TextInput from "../../components/TextInput";
-import Button from "../../components/Button";
-import theme from "../../theme";
+import React, {useState} from 'react';
+import {
+  KeyboardAvoidingView,
+  StyleSheet,
+  Text,
+  View,
+  ViewStyle,
+} from 'react-native';
+import Screen from '../../components/Screen';
+import {useNavigation} from '@react-navigation/native';
+import TextInput from '../../components/TextInput';
+import Button from '../../components/Button';
+import theme from '../../theme';
+import {useUserStore} from '../../stores/UserStore';
 
 const SignInScreen = () => {
+  const {signIn} = useUserStore();
   const navigation = useNavigation();
 
-  function handleSignIn() {
-    // navigation.navigate('Home');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
+  async function handleSignIn() {
+    try {
+      await signIn({email, password});
+      console.log('SignedIn');
+      // navigation.navigate('Home');
+    } catch (e) {
+      console.log('Error signing in', e);
+    }
   }
 
   return (
@@ -20,6 +37,8 @@ const SignInScreen = () => {
       <KeyboardAvoidingView style={styles.container}>
         <View style={styles.inputs}>
           <TextInput
+            value={email}
+            onChangeText={setEmail}
             placeholder={'john@doe.com'}
             keyboardType={'email-address'}
             autoCompleteType={'email'}
@@ -27,6 +46,8 @@ const SignInScreen = () => {
             autoCapitalize={'none'}
           />
           <TextInput
+            value={password}
+            onChangeText={setPassword}
             placeholder={'*******'}
             autoCorrect={false}
             autoCapitalize={'none'}
