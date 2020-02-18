@@ -7,14 +7,25 @@ import { enableScreens } from 'react-native-screens';
 import { NavigationTheme } from "./src/theme";
 
 import AuthStack from "./src/navigation/AuthStack";
+import {usePersistentNavigation} from "./src/hooks/usePersistentNavigation";
 
 enableScreens(); // Performance optimization
 
 const App = () => {
+  const {initialState, isReady, persistNavigationState} = usePersistentNavigation();
+
+  if (!isReady) {
+    return null
+  }
+
   return (
     <SafeAreaProvider>
-      <NavigationContainer theme={NavigationTheme}>
-        <StatusBar barStyle="dark-content" />
+      <NavigationContainer
+        theme={NavigationTheme}
+        initialState={initialState}
+        onStateChange={persistNavigationState}
+      >
+        <StatusBar barStyle="light-content" />
         <AuthStack/>
       </NavigationContainer>
     </SafeAreaProvider>
