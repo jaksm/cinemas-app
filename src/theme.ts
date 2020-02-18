@@ -47,7 +47,7 @@ const typography = {
   } as TextStyle,
 };
 
-const screenPadding = 30;
+const screenPadding = 24;
 
 const theme = {
   colors,
