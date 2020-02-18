@@ -15,37 +15,31 @@ const colors = {
 
 const typography = {
   h1: {
-    fontFamily: 'Muli',
     fontWeight: 'bold',
     fontSize: 34,
     color: colors.white,
   } as TextStyle,
   h2: {
-    fontFamily: 'Muli',
     fontWeight: '600',
     fontSize: 24,
     color: colors.white,
   } as TextStyle,
   h3: {
-    fontFamily: 'Muli',
     fontWeight: '600',
     fontSize: 18,
     color: colors.white,
   } as TextStyle,
   p: {
-    fontFamily: 'Muli',
     fontWeight: '500',
     fontSize: 14,
     color: colors.text,
   } as TextStyle,
   small: {
-    fontFamily: 'Muli',
     fontWeight: 'normal',
     fontSize: 11,
     color: colors.white,
   } as TextStyle,
   label: {
-    fontFamily: 'Muli',
     fontWeight: '600',
     fontSize: 14,
     color: colors.white,
