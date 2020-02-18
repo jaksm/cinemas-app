@@ -14,6 +14,7 @@ import {useNavigation} from '@react-navigation/native';
 
 const SignUpScreen = () => {
   const navigation = useNavigation();
+
   function handleSignUp() {
     // navigation.navigate('Home');
   }
