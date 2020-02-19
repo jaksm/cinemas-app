@@ -36,8 +36,8 @@ const typography = {
   } as TextStyle,
   small: {
     fontWeight: 'normal',
-    fontSize: 11,
-    color: colors.white,
+    fontSize: 13,
+    color: colors.grey,
   } as TextStyle,
   label: {
     fontWeight: '600',
