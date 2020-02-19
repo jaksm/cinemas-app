@@ -1,9 +1,9 @@
 import React, {FC, useEffect} from 'react';
-import Screen from '../components/Screen';
+import Screen from '../../components/Screen';
 import {ScrollView, Text, View} from 'react-native';
-import theme from '../theme';
-import {useMovieStore} from '../stores/MovieStore';
-import HorizontalList from '../components/HorizontalList';
+import theme from '../../theme';
+import {useMovieStore} from '../../stores/MovieStore';
+import HorizontalList from '../../components/HorizontalList';
 import {observer} from 'mobx-react-lite';
 
 const HomeScreen: FC = () => {

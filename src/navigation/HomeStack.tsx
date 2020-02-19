@@ -1,10 +1,9 @@
 import React from 'react';
 import {createStackNavigator, TransitionSpecs} from '@react-navigation/stack';
-import HomeScreen from '../screens/HomeScreen';
-import {createDummyScreen} from '../utils/createDummyScreen';
 import {Image, StyleSheet, View, ViewStyle} from 'react-native';
-
-const MovieScreen = createDummyScreen('Movie');
+// Screens
+import HomeScreen from '../screens/Home/HomeScreen';
+import MovieScreen from '../screens/Home/MovieScreen';
 
 const HomeBanner = () => {
   return (
@@ -37,7 +36,7 @@ function HomeStack() {
           header: () => <HomeBanner />,
         }}
       />
-      <Stack.Screen name="MovieScreen" component={MovieScreen} />
+      <Stack.Screen name="Movie" component={MovieScreen} />
     </Stack.Navigator>
   );
 }

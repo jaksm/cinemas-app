@@ -14,6 +14,8 @@ import {Movie} from '../stores/MovieStore';
 import {getFullImagePath} from '../stores/api';
 import theme from '../theme';
 import truncate from '../utils/truncate';
+import {useNavigation} from '@react-navigation/native';
+import {toJS} from "mobx";
 
 const DIMENSIONS = {
   width: 148,
@@ -24,13 +26,20 @@ const SNAP_WIDTH = DIMENSIONS.width + ITEM_PADDING;
 
 type ListItem = Movie;
 
-const Item: FC<ListItem> = ({title, poster_path, vote_average, vote_count}) => {
+const Item: FC<ListItem> = item => {
+  const {title, poster_path, vote_average, vote_count} = item;
+
+  const navigation = useNavigation();
+
   const posterURI = getFullImagePath(poster_path);
+
   const {current: price} = useRef<string>(
     Math.round(Math.random() * 100).toFixed(2),
   );
 
-  function handleMoviePress() {}
+  function handleMoviePress() {
+    navigation.navigate('Movie', { movie: toJS(item) });
+  }
 
   return (
     <TouchableOpacity
