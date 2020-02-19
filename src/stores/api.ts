@@ -6,13 +6,13 @@ const endpoint = (resource: string, append?: string) =>
     ? `${BASE_URL}${resource}?api_key=${API_KEY}${append}`
     : `${BASE_URL}${resource}?api_key=${API_KEY}`;
 
+export const getFullImagePath = (imagePath: string) =>
+  `https://image.tmdb.org/t/p/w500${imagePath}`;
+
+export const getFullVideoPath = (videoKey: string) =>
+  `https://www.youtube.com/watch?v=${videoKey}`;
+
 export const api = {
-  getMostPopular: async () => {
-    const response = await fetch(
-      endpoint('/discover/movie?sort_by=popularity.desc'),
-    );
-    return response.json();
-  },
   getUpcoming: async () => {
     const response = await fetch(endpoint('/movie/upcoming'));
     return response.json();
@@ -21,9 +21,9 @@ export const api = {
     const response = await fetch(endpoint('/movie/now_playing'));
     return response.json();
   },
-  getDetails: async (movieId: string) => {
+  getDetails: async (movieId: number) => {
     const response = await fetch(
-      endpoint(`/movie/${movieId}`, '&append_to_response=videos,images'),
+      endpoint(`/movie/${movieId}`, '&append_to_response=videos'),
     );
     return response.json();
   },
