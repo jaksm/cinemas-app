@@ -24,7 +24,7 @@ interface UserData {
 }
 
 class UserStore {
-  @observable user!: User;
+  @observable user: User | null = null;
 
   checkAuth = async (): Promise<boolean> => {
     const data = await AsyncStorage.getItem('currentUser');
@@ -42,6 +42,8 @@ class UserStore {
       password: credentials.password,
     };
     await AsyncStorage.setItem(credentials.email, JSON.stringify(userData));
+
+    this.user = {name: userData.name, email: credentials.email};
   };
 
   @action signIn = async (credentials: SignInCredentials): Promise<void> => {
@@ -61,6 +63,11 @@ class UserStore {
     );
 
     this.user = {name: userData.name, email: credentials.email};
+  };
+
+  @action signOut = async () => {
+    this.user = null;
+    await AsyncStorage.removeItem('currentUser');
   };
 }
 

@@ -4,6 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
 import Screen from '../components/Screen';
 import theme from '../theme';
+import ProfileScreen from '../screens/ProfileScreen';
 
 // Inactive icons
 import HomeIconInactive from '../assets/icons/home-inactive.svg';
@@ -28,7 +29,6 @@ const createDummyScreen = (screenName: string) => () => (
 const CartScreen = createDummyScreen('Cart');
 const TicketsScreen = createDummyScreen('Tickets');
 const FavouritesScreen = createDummyScreen('Favourites');
-const ProfileScreen = createDummyScreen('Profile');
 
 const Tab = createBottomTabNavigator();
 

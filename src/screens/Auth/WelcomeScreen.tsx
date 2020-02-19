@@ -1,13 +1,13 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
+  ActivityIndicator,
   Image,
   StyleSheet,
   Text,
-  ViewStyle,
-  View,
   TextStyle,
   TouchableOpacity,
-  ActivityIndicator,
+  View,
+  ViewStyle,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import theme from '../../theme';
@@ -29,19 +29,20 @@ const WelcomeScreen = () => {
     navigation.navigate('SignIn');
   }
 
-  const handleCheckAuth = useCallback(async () => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const handleCheckAuth = async () => {
     const authed = await checkAuth();
+    setLoading(false);
 
     if (authed) {
       navigation.navigate('Home');
-    } else {
-      setLoading(false);
     }
-  }, [checkAuth, navigation]);
+  };
 
   useEffect(() => {
     handleCheckAuth();
-  }, [handleCheckAuth]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <SafeScreen style={styles.container}>

@@ -12,7 +12,7 @@ const Screen: FC<ScreenProps> = ({children, style}) => (
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: theme.screenPadding,
+    padding: theme.screenPadding,
     flex: 1,
   } as ViewStyle,
 });
