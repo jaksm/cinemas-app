@@ -5,6 +5,8 @@ import theme from '../../theme';
 import {useMovieStore} from '../../stores/MovieStore';
 import HorizontalList from '../../components/HorizontalList';
 import {observer} from 'mobx-react-lite';
+import FAB from '../../components/FAB';
+import {useNavigation} from '@react-navigation/native';
 
 const HomeScreen: FC = () => {
   const {
@@ -13,6 +15,12 @@ const HomeScreen: FC = () => {
     getUpcoming,
     upcomingMovies,
   } = useMovieStore();
+  const navigation = useNavigation();
+
+
+  function handleCameraPress() {
+    navigation.navigate('QRScan');
+  }
 
   useEffect(() => {
     getCurrentlyPlaying();
@@ -20,7 +28,7 @@ const HomeScreen: FC = () => {
   }, [getCurrentlyPlaying, getUpcoming]);
 
   return (
-    <Screen>
+    <Screen style={{position: 'relative'}}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View>
           <Text style={theme.typography.h1}>Currently</Text>
@@ -36,6 +44,8 @@ const HomeScreen: FC = () => {
           <HorizontalList items={upcomingMovies} />
         </View>
       </ScrollView>
+
+      <FAB onPress={handleCameraPress} />
     </Screen>
   );
 };

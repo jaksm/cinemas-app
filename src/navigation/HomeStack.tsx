@@ -5,6 +5,7 @@ import ShareIcon from '../assets/icons/share.svg';
 // Screens
 import HomeScreen from '../screens/Home/HomeScreen';
 import MovieScreen from '../screens/Home/MovieScreen';
+import QrScanScreen from "../screens/Home/QRScanScreen";
 
 const HomeBanner = () => {
   return (
@@ -46,7 +47,14 @@ function HomeStack() {
           headerRight: () => <ShareIcon />,
           headerRightContainerStyle: {
             marginRight: 20,
-          }
+          },
+        }}
+      />
+      <Stack.Screen
+        name="QRScan"
+        component={QrScanScreen}
+        options={{
+          headerShown: false,
         }}
       />
     </Stack.Navigator>

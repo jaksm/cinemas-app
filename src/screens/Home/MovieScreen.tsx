@@ -20,6 +20,10 @@ const MovieScreen: FC = () => {
   const route = useRoute();
   const {movie}: {movie: MovieDetails | undefined} = route.params;
 
+  const {current: price} = useRef<string>(
+    Math.round(Math.random() * 100).toFixed(2),
+  );
+
   if (!movie) {
     return (
       <Screen>
@@ -29,9 +33,6 @@ const MovieScreen: FC = () => {
   }
 
   const genres = movie.genres.map(g => g.name).join(', ');
-  const {current: price} = useRef<string>(
-    Math.round(Math.random() * 100).toFixed(2),
-  );
 
   return (
     <Screen>

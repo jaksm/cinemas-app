@@ -20,6 +20,7 @@ import {createDummyScreen} from '../utils/createDummyScreen';
 // Screens
 import ProfileScreen from '../screens/ProfileScreen';
 import HomeStack from './HomeStack';
+import QrScanScreen from "../screens/Home/QRScanScreen";
 
 const CartScreen = createDummyScreen('Cart');
 const TicketsScreen = createDummyScreen('Tickets');
