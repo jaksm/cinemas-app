@@ -1,7 +1,7 @@
 import React from 'react';
 import {createStackNavigator, TransitionSpecs} from '@react-navigation/stack';
 import AuthStack from './AuthStack';
-import HomeTabs from "./HomeTabs";
+import HomeTabs from './HomeTabs';
 
 const Stack = createStackNavigator();
 
@@ -23,7 +23,11 @@ function AppStack() {
         component={AuthStack}
         options={{headerShown: false}}
       />
-      <Stack.Screen name="Home" component={HomeTabs} />
+      <Stack.Screen
+        name="Home"
+        component={HomeTabs}
+        options={{headerShown: false}}
+      />
     </Stack.Navigator>
   );
 }

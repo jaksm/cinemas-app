@@ -1,30 +1,25 @@
 import * as React from 'react';
 import {Text} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import HomeScreen from '../screens/HomeScreen';
 import Screen from '../components/Screen';
 import theme from '../theme';
-import ProfileScreen from '../screens/ProfileScreen';
-
 // Inactive icons
 import HomeIconInactive from '../assets/icons/home-inactive.svg';
 import CartIconInactive from '../assets/icons/cart-inactive.svg';
 import TicketsIconInactive from '../assets/icons/tickets-inactive.svg';
 import FavouritesIconInactive from '../assets/icons/favourites-inactive.svg';
 import ProfileIconInactive from '../assets/icons/profile-inactive.svg';
-
 // Active icons
 import HomeIconActive from '../assets/icons/home-active.svg';
 import CartIconActive from '../assets/icons/cart-active.svg';
 import TicketsIconActive from '../assets/icons/tickets-active.svg';
 import FavouritesIconActive from '../assets/icons/favourites-active.svg';
 import ProfileIconActive from '../assets/icons/profile-active.svg';
+import {createDummyScreen} from '../utils/createDummyScreen';
 
-const createDummyScreen = (screenName: string) => () => (
-  <Screen style={{justifyContent: 'center', alignItems: 'center'}}>
-    <Text style={theme.typography.h1}>{screenName}</Text>
-  </Screen>
-);
+// Screens
+import ProfileScreen from '../screens/ProfileScreen';
+import HomeStack from './HomeStack';
 
 const CartScreen = createDummyScreen('Cart');
 const TicketsScreen = createDummyScreen('Tickets');
@@ -37,7 +32,7 @@ function HomeTabs() {
     <Tab.Navigator initialRouteName={'HomeScreen'}>
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={HomeStack}
         options={{
           tabBarIcon: ({focused}) =>
             focused ? <HomeIconActive /> : <HomeIconInactive />,
