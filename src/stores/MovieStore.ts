@@ -18,12 +18,80 @@ export interface Movie {
   overview: string;
   release_date: Date;
 }
+
+export type Genre = {
+  id: number;
+  name: string;
+};
+
+export type ProductionCompany = {
+  id: number;
+  logo_path: string;
+  name: string;
+  origin_country: string;
+};
+
+export type ProductionCountry = {
+  iso_3166_1: string;
+  name: string;
+};
+
+export type SpokenLanguage = {
+  iso_639_1: string;
+  name: string;
+};
+
+export type VideoResult = {
+  id: string;
+  iso_639_1: string;
+  iso_3166_1: string;
+  key: string;
+  name: string;
+  site: string;
+  size: number;
+  type: string;
+};
+
+export interface MovieDetails {
+  adult: boolean;
+  backdrop_path: string;
+  belongs_to_collection: {
+    id: number;
+    name: string;
+    poster_path: string;
+    backdrop_path: string;
+  };
+  budget: number;
+  genres: Genre[];
+  homepage: string;
+  id: number;
+  imdb_id: string;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  production_companies: ProductionCompany[];
+  production_countries: ProductionCountry[];
+  release_date: Date; // map this
+  revenue: number;
+  runtime: number;
+  spoken_languages: SpokenLanguage[];
+  status: string;
+  tagline: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+  videos: {
+    results: VideoResult[];
+  };
+}
+
 class MovieStore {
   @observable currentlyPlayingMovies: Movie[] = [];
   @observable upcomingMovies: Movie[] = [];
   @observable mostPopularMovies: Movie[] = [];
-
-  @observable movie: Movie | null = null;
 
   @action getCurrentlyPlaying = async () => {
     const {results} = await api.getCurrentlyPlaying();
@@ -45,7 +113,10 @@ class MovieStore {
 
   @action getMovieDetails = async (movieId: number) => {
     const result = await api.getDetails(movieId);
-    console.log(JSON.stringify(result, null, 2));
+    return {
+      ...result,
+      release_date: new Date(result.release_date),
+    } as MovieDetails;
   };
 }
 

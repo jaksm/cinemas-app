@@ -10,12 +10,12 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import {Movie} from '../stores/MovieStore';
+import {Movie, MovieDetails, useMovieStore} from '../stores/MovieStore';
 import {getFullImagePath} from '../stores/api';
 import theme from '../theme';
 import truncate from '../utils/truncate';
 import {useNavigation} from '@react-navigation/native';
-import {toJS} from "mobx";
+import {toJS} from 'mobx';
 
 const DIMENSIONS = {
   width: 148,
@@ -30,6 +30,7 @@ const Item: FC<ListItem> = item => {
   const {title, poster_path, vote_average, vote_count} = item;
 
   const navigation = useNavigation();
+  const {getMovieDetails} = useMovieStore();
 
   const posterURI = getFullImagePath(poster_path);
 
@@ -37,8 +38,9 @@ const Item: FC<ListItem> = item => {
     Math.round(Math.random() * 100).toFixed(2),
   );
 
-  function handleMoviePress() {
-    navigation.navigate('Movie', { movie: toJS(item) });
+  async function handleMoviePress() {
+    const movieDetails = await getMovieDetails(item.id);
+    navigation.navigate('Movie', {movie: toJS<MovieDetails>(movieDetails)});
   }
 
   return (

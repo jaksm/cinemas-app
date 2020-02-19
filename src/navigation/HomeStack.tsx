@@ -1,6 +1,7 @@
 import React from 'react';
 import {createStackNavigator, TransitionSpecs} from '@react-navigation/stack';
 import {Image, StyleSheet, View, ViewStyle} from 'react-native';
+import ShareIcon from '../assets/icons/share.svg';
 // Screens
 import HomeScreen from '../screens/Home/HomeScreen';
 import MovieScreen from '../screens/Home/MovieScreen';
@@ -36,7 +37,18 @@ function HomeStack() {
           header: () => <HomeBanner />,
         }}
       />
-      <Stack.Screen name="Movie" component={MovieScreen} />
+      <Stack.Screen
+        name="Movie"
+        component={MovieScreen}
+        options={{
+          headerTitle: 'Reserve Tickets',
+          headerTitleAlign: 'center',
+          headerRight: () => <ShareIcon />,
+          headerRightContainerStyle: {
+            marginRight: 20,
+          }
+        }}
+      />
     </Stack.Navigator>
   );
 }
